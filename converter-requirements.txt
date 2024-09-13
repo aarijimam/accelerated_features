@@ -1,0 +1,7 @@
+python =  3.8.19
+tensorflow=2.13
+onnx=1.16.2
+torch=2.4.1
+onnx-tf=1.10.0
+torchsumary = 1.5.1
+numpy = 1.24.3
