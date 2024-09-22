@@ -63,10 +63,9 @@ class XFeat(nn.Module):
 		"""
 		if top_k is None: top_k = self.top_k
 		if detection_threshold is None: detection_threshold = self.detection_threshold
-		x, rh1, rw1 = self.preprocess_tensor(x)
+		x2, rh1, rw1 = self.preprocess_tensor(x)
 
-		B, _, _H1, _W1 = x.shape
-        
+		B, _, _H1, _W1 = x2.shape
 		M1, K1, H1 = self.tf_infer(x)
 		#M1, K1, H1 = self.net(x)
 		M1 = torch.from_numpy(M1)
@@ -219,9 +218,8 @@ class XFeat(nn.Module):
 				mkpts_0, mkpts_1 -> np.ndarray (N,2) xy coordinate matches from image1 to image2
 		"""
 		if top_k is None: top_k = self.top_k
-		img1 = self.parse_input(img1)
-		img2 = self.parse_input(img2)
-
+		# img1 = self.parse_input(img1)
+		# img2 = self.parse_input(img2)
 		out1 = self.detectAndCompute(img1, top_k=top_k)[0]
 		out2 = self.detectAndCompute(img2, top_k=top_k)[0]
 
@@ -241,8 +239,8 @@ class XFeat(nn.Module):
 				matches -> List[torch.Tensor(N, 4)]: List of size B containing tensor of pairwise matches (x1,y1,x2,y2)
 		"""
 		if top_k is None: top_k = self.top_k
-		im_set1 = self.parse_input(im_set1)
-		im_set2 = self.parse_input(im_set2)
+		# im_set1 = self.parse_input(im_set1)
+		# im_set2 = self.parse_input(im_set2)
 
 		#Compute coarse feats
 		out1 = self.detectAndComputeDense(im_set1, top_k=top_k)
